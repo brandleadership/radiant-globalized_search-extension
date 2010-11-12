@@ -1,6 +1,6 @@
 # Radiant Globalized Search extension
 
-Supports the Globalize2 extension for Radiant.
+This is a Radiant Search extension for Radiant websites which use the [Globalize2 extension](http://github.com/Aissac/radiant-globalize2-extension).
 
 ## Requirements
   [Radiant Globalize2 extension](http://github.com/Aissac/radiant-globalize2-extension)
