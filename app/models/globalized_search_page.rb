@@ -34,7 +34,7 @@ class GlobalizedSearchPage < Page
   tag 'search:results:each' do |tag|
     returning String.new do |content|
       query_result.each do |page|
-        radiant_page = Page.find(page.page_id)
+        radiant_page = Page.find(page.id)
         tag.locals.page = radiant_page
         content << tag.expand
       end
@@ -54,6 +54,15 @@ class GlobalizedSearchPage < Page
     tag.attr['length'] ||= 100
     length = tag.attr['length'].to_i
     helper.truncate(helper.strip_tags(tag.expand).gsub(/\s+/," "), length)
+  end
+  
+  desc %{ }
+  tag 'parent_or_self_link' do |tag|
+    text = tag.double? ? tag.expand : tag.render('title')
+    slugs = tag.locals.page.ancestors.map {|a| a.slug}.reverse
+    slugs[0] = I18n.locale.to_s
+    slugs << tag.locals.page.slug unless tag.locals.page.class_name == 'ParentSearchPage'
+    %{<a href="/#{slugs.join('/')}">#{text}</a>}
   end
   
   desc %{    <r:search:highlight [length="100"] />
@@ -84,15 +93,10 @@ class GlobalizedSearchPage < Page
       sql_content_check = "((LOWER(page_parts.content) LIKE ?) OR (LOWER(title) LIKE ?))"
     end
     unless (@query = q.to_s.strip).blank?
-      pages = Page.find_by_sql("SELECT pages.id AS page_id, pages.class_name, pages.status_id, pages.parent_id, pages.virtual, pages.position, pages.sitemap FROM `pages` LEFT OUTER JOIN `page_parts` ON page_parts.page_id = pages.id LEFT OUTER JOIN `page_part_translations` ON page_part_translations.page_part_id = page_parts.id WHERE (LOWER(page_part_translations.content) LIKE '%#{q}%') AND page_part_translations.locale = '#{params[:locale]}' AND class_name = '' GROUP BY page_id ORDER BY published_at DESC")
-      @query_result = pages.delete_if { |p| !p.published? }
+      @query_result = Page.find(:all, :conditions => ['page_part_translations.content LIKE ? AND page_part_translations.locale = ? AND status_id = ? AND (class_name = ? OR class_name = ?)', "%#{@query}%", I18n.locale.to_s, (Status[:published]).id, '', 'ParentSearchPage'], :include => [:parts => :translations], :order => 'published_at DESC')
     end
     lazy_initialize_parser_and_context
-    if layout
-      parse_object(layout)
-    else
-      render_page_part(:body)
-    end
+    layout ? parse_object(layout) : render_page_part(:body)
   end
   
   def helper
