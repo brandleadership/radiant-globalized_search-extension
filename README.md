@@ -1,12 +1,10 @@
-# Radiant Globalized Search extension
-
-This is a Radiant Search extension for Radiant websites which use the [Globalize2 extension](http://github.com/Aissac/radiant-globalize2-extension).
+# Radiant Globalized Search Extension
+This is a Radiant search extension for websites which use the [Globalize2 extension](http://github.com/Aissac/radiant-globalize2-extension).
 
 ## Requirements
-  [Radiant Globalize2 extension](http://github.com/Aissac/radiant-globalize2-extension)
+[Radiant Globalize2 extension](http://github.com/Aissac/radiant-globalize2-extension)
 
 ## Installation
-
 This extension works by creating a new page type called "Search".  After you 
 install it and re-start your web server, you should have a new type of page 
 available.
@@ -19,7 +17,6 @@ available.
 6. Bask in the glow of a job well done.  :)
 
 ## Additional Page Types
-
 You can use now additional Page Types like `Parent Search` or `No Search`. All pages with any Page Types will be automatically excluded from the search action. If you now want to exclude another normal page from the search action simple choose the `No Search` Page Type.
 If you have pages which were rendered by the parent with for example the `r:children:each` tag of Radiant and you don't want to show this site but the parent site simple use the `Parent Search` Page Type.
 
@@ -48,4 +45,3 @@ need to know to make your own page better.
         </r:search:results:each>
       </ul>
     </r:search:results>
-    
