@@ -9,14 +9,14 @@ This extension works by creating a new page type called "Search". After you inst
 
 1. Download and install just like any other extension.
 2. Create a new page called "Search" (or whatever you want)
-3. Set the Page Type to "Search" and the Status to "Published"
+3. Set the Page Type to "Globalized Search" and the Status to "Published"
 4. Take the sample code below and paste it into the body of the new page.
 5. Visit http://localhost:3000/search and enter a search term.
 6. Bask in the glow of a job well done.  :)
 
 ## Additional Page Types
-You can use now additional Page Types like "Parent Search" or "No Search". All pages with any Page Types will be automatically excluded from the search action. If you now want to exclude another normal page from the search action simple choose the "No Search" Page Type.
-If you have pages which were rendered by the parent with for example the `r:children:each` tag of Radiant and you don't want to show this site but the parent site simple use the "Parent Search" Page Type.
+You can use now additional Page Types like "Parent Search" or "No Search". All pages with any Page Types will be automatically excluded from the search process. If you now want to exclude another normal page from the search process simple choose the "No Search" Page Type.
+If you have pages which were rendered by the parent with for example the `r:children:each` tag of Radiant and you don't want to show the child but the parent site simple use the "Parent Search" Page Type. So the search result will be the parent site instead of the child site.
 
 ## Example
 Place everything of the following code in the body of the "Search" page.  This will provide a very basic Search page, but it should show you everything you need to know to make your own page better.
