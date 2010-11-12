@@ -16,7 +16,7 @@ This extension works by creating a new page type called "Search". After you inst
 
 ## Additional Page Types
 You can use now additional Page Types like "Parent Search" or "No Search". All pages with any Page Types will be automatically excluded from the search process. If you now want to exclude another normal page from the search process simple choose the "No Search" Page Type.
-If you have pages which were rendered by the parent with for example the `r:children:each` tag of Radiant and you don't want to show the child but the parent site simple use the "Parent Search" Page Type. So the search result will be the parent site instead of the child site.
+If you have pages which were rendered by the parent with for example the `r:children:each` tag of Radiant and you want to show the parent instead of the child site simple use the "Parent Search" Page Type.
 
 ## Example
 Place everything of the following code in the body of the "Search" page.  This will provide a very basic Search page, but it should show you everything you need to know to make your own page better.
